@@ -325,7 +325,7 @@ command = [
 ]
 
     with st.spinner("Analyzing X-ray..."):
-        result = subprocess.run(command, capture_output=True, text=True)
+    result = subprocess.run(command, capture_output=True, text=True)
 
     output = result.stdout + "\n" + result.stderr
 
