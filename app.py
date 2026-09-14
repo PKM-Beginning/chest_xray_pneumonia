@@ -316,13 +316,13 @@ if uploaded_file is not None:
         image_path = tmp.name
 
     output_path = "streamlit_gradcam.png"
-command = [
-    sys.executable, "predict.py",
-    "--image", image_path,
-    "--checkpoint", "best_model.pt",
-    "--gradcam",
-    "--out", output_path,
-]
+    command = [
+        sys.executable, "predict.py",
+        "--image", image_path,
+        "--checkpoint", "best_model.pt",
+        "--gradcam",
+        "--out", output_path,
+    ]
 
     with st.spinner("Analyzing X-ray..."):
     result = subprocess.run(command, capture_output=True, text=True)
