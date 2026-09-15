@@ -316,16 +316,25 @@ if uploaded_file is not None:
         image_path = tmp.name
 
     output_path = "streamlit_gradcam.png"
+
     command = [
-        sys.executable, "predict.py",
-        "--image", image_path,
-        "--checkpoint", "best_model.pt",
+        sys.executable,
+        "predict.py",
+        "--image",
+        image_path,
+        "--checkpoint",
+        "best_model.pt",
         "--gradcam",
-        "--out", output_path,
+        "--out",
+        output_path,
     ]
 
     with st.spinner("Analyzing X-ray..."):
-    result = subprocess.run(command, capture_output=True, text=True)
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True
+        )
 
     output = result.stdout + "\n" + result.stderr
 
@@ -336,8 +345,13 @@ if uploaded_file is not None:
         st.error("Prediction failed. See technical details below.")
         with st.expander("Technical error"):
             st.code(output)
+
     else:
-        prediction_match = re.search(r"Prediction:\s*(NORMAL|PNEUMONIA)", output, re.IGNORECASE)
+        prediction_match = re.search(
+            r"Prediction:\s*(NORMAL|PNEUMONIA)",
+            output,
+            re.IGNORECASE
+        )
         confidence_match = re.search(r"Confidence:\s*([0-9.]+)", output)
         probabilities_match = re.search(r"Class probabilities:\s*(.*)", output)
 
